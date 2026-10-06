@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Zuriel
 
-## Getting Started
+Portafolio personal en Next.js 15 con arquitectura similar a TiendaFrontCL (App Router + `src/` + Tailwind 4 + shadcn/ui) y soporte para [React Bits](https://reactbits.dev/).
 
-First, run the development server:
+## Stack
+
+- Next.js 15 (App Router) + React 19 + TypeScript
+- Tailwind CSS v4 + tokens CSS
+- shadcn/ui
+- React Bits (registry `@react-bits`)
+- Motion / GSAP / OGL (según componentes instalados)
+
+## Empezar
 
 ```bash
+cd C:\Users\zurie\OneDrive\Escritorio\portfolio-zuriel
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editar tu contenido
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Qué | Archivo |
+|-----|---------|
+| Nombre, rol, bio, email, redes | `src/content/site.ts` |
+| Proyectos | `src/content/projects.ts` |
+| Skills | `src/content/skills.ts` |
 
-## Learn More
+Los proyectos en home usan `featured: true`. La ruta `/projects` muestra todos.
 
-To learn more about Next.js, take a look at the following resources:
+## Instalar más React Bits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+El registry ya está en `components.json`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npx shadcn@latest add @react-bits/NombreComponente-TS-TW
+```
 
-## Deploy on Vercel
+Ejemplos:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx shadcn@latest add @react-bits/BlurText-TS-TW
+npx shadcn@latest add @react-bits/Magnet-TS-TW
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Mueve los archivos generados a `src/components/react-bits/` si el CLI los deja en `src/components/`, y agrega `"use client"` si usan hooks o WebGL.
+
+Ya instalados en el hero:
+
+- `Aurora` — fondo
+- `SplitText` — título animado
+
+## Scripts
+
+```bash
+npm run dev      # desarrollo (Turbopack)
+npm run build    # build de producción
+npm run start    # servir build
+npm run lint     # ESLint
+```
+
+## Estructura
+
+```text
+src/
+  app/                 # rutas
+  components/
+    ui/                # shadcn
+    react-bits/        # React Bits
+    layout/            # header, footer, shell
+    portfolio/         # secciones
+  content/             # datos editables
+  lib/utils.ts         # cn()
+```
+
+## Notas
+
+- Tema oscuro tecnológico por defecto (`html.dark`).
+- Tipografía: Space Grotesk (display) + IBM Plex Sans/Mono.
+- No incluye Firebase, Stripe ni lógica de ecommerce.

@@ -1,26 +1,227 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --background: #f7f0e7;
+  --foreground: #5b3f2e;
+  --card: #e7d8c9;
+  --card-foreground: #5b3f2e;
+  --popover: #f7f0e7;
+  --popover-foreground: #5b3f2e;
+  --primary: #000000;
+  --primary-foreground: #f7f0e7;
+  --secondary: #cfb59c;
+  --secondary-foreground: #5b3f2e;
+  --muted: #e7d8c9;
+  --muted-foreground: #5b3f2e;
+  --accent: #a38368;
+  --accent-foreground: #f7f0e7;
+  --destructive: #ef4444;
+  --border: rgb(91 63 46 / 0.18);
+  --input: rgb(91 63 46 / 0.22);
+  --ring: #5b3f2e;
+  --link: #5b3f2e;
+  --chart-1: #f7f0e7;
+  --chart-2: #e7d8c9;
+  --chart-3: #cfb59c;
+  --chart-4: #a38368;
+  --chart-5: #5b3f2e;
+  /* Negro cálido para superficies grandes. El #000 puro aplana la paleta. */
+  --ink: #15110e;
+  --ink-foreground: #f7f0e7;
+  --radius: 0.75rem;
+  --sidebar: #e7d8c9;
+  --sidebar-foreground: #5b3f2e;
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #f7f0e7;
+  --sidebar-accent: #cfb59c;
+  --sidebar-accent-foreground: #5b3f2e;
+  --sidebar-border: rgb(91 63 46 / 0.18);
+  --sidebar-ring: #5b3f2e;
+  --section-space: clamp(4rem, 8vw, 7rem);
+  /* Las islas flotan sobre el contenido, por lo que el ancla de scroll
+     necesita despejar la altura de la isla mas su margen superior. */
+  --header-height: 5.5rem;
+  --clef-wall: #3b2c21;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #161210;
+  --foreground: #f3e6d8;
+  --card: #241c18;
+  --card-foreground: #f3e6d8;
+  --popover: #241c18;
+  --popover-foreground: #f3e6d8;
+  --primary: #f3e6d8;
+  --primary-foreground: #161210;
+  --secondary: #3a2d26;
+  --secondary-foreground: #f3e6d8;
+  --muted: #2a211c;
+  --muted-foreground: #e4d0bf;
+  --accent: #c4a484;
+  --accent-foreground: #161210;
+  --destructive: #ef4444;
+  --border: rgb(243 230 216 / 0.14);
+  --input: rgb(243 230 216 / 0.2);
+  --ring: #e7d8c9;
+  --link: #f3e6d8;
+  --chart-1: #161210;
+  --chart-2: #241c18;
+  --chart-3: #3a2d26;
+  --chart-4: #c4a484;
+  --chart-5: #f3e6d8;
+  --ink: #0c0a09;
+  --ink-foreground: #f7f0e7;
+  --sidebar: #241c18;
+  --sidebar-foreground: #f3e6d8;
+  --sidebar-primary: #f3e6d8;
+  --sidebar-primary-foreground: #161210;
+  --sidebar-accent: #3a2d26;
+  --sidebar-accent-foreground: #f3e6d8;
+  --sidebar-border: rgb(243 230 216 / 0.14);
+  --sidebar-ring: #e7d8c9;
+  --clef-wall: #a89078;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-link: var(--link);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+  --font-mono: var(--font-mono);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      transition: none;
+    }
+  }
+
+  ::selection {
+    background: color-mix(in srgb, #cfb59c 55%, transparent);
+    color: var(--foreground);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-pad {
+    padding-block: var(--section-space);
+  }
+
+  .container-narrow {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* El flotado de la clave de sol vive en CSS y no en JS: decidirlo durante
+     el render rompía la hidratación, porque el servidor no conoce la
+     preferencia de movimiento del visitante. */
+  @keyframes clef-float {
+    0%,
+    100% {
+      transform: translateY(-9px);
+    }
+    50% {
+      transform: translateY(9px);
+    }
+  }
+
+  .animate-clef-float {
+    animation: clef-float 7s ease-in-out infinite;
+  }
+
+  @keyframes avatar-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-avatar-float {
+    animation: avatar-float 8s ease-in-out infinite;
+  }
+
+  /* Cápsula del nav flotante. El radio completo vive solo en esta capa de
+     chrome; las superficies de contenido siguen con 12px y 24px. */
+  .nav-island {
+    @apply rounded-full border border-border/50 bg-background/70 backdrop-blur-xl;
+    box-shadow: 0 10px 34px rgb(91 63 46 / 0.12);
+  }
+
+  .dark .nav-island {
+    box-shadow: 0 10px 34px rgb(0 0 0 / 0.4);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .nav-island {
+      background: var(--background);
+      backdrop-filter: none;
+    }
+  }
 }
